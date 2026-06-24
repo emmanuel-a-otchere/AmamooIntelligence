@@ -1,0 +1,75 @@
+[recipe]
+name = "research_digest"
+description = "Scheduled multi-source research digest: gather → cluster → deep-research → synthesize → optional TTS"
+version = "0.1.0"
+parent_template = "deep-researcher"
+
+[intelligence]
+model = "qwen3:8b"
+
+[engine]
+key = "ollama"
+
+[schedule]
+# Default: weekdays at 07:00 local time. Override per-deployment.
+cron = "0 7 * * 1-5"
+timezone = "local"
+
+[gather]
+# Configured per-deployment via docs/SOURCES.md. Defaults below are sensible starting points.
+sources = [
+  "https://news.ycombinator.com/rss",
+  "https://arxiv.org/rss/cs.AI",
+  "https://arxiv.org/rss/cs.CL",
+  "https://www.technologyreview.com/feed/",
+]
+max_items_per_source = 25
+
+[cluster]
+# Identify recurring themes across all gathered items.
+agent_template = "deep-researcher"
+max_themes = 4
+
+[deep_research]
+# Run a focused deep-research pass per theme.
+agent_template = "deep-researcher"
+max_turns_per_theme = 8
+min_citations_per_theme = 3
+
+[synthesize]
+# Combine all theme briefs into a single Markdown briefing.
+output_path = "briefings/{date}.md"
+agent_template = "deep-researcher"
+
+[audio]
+# Optional TTS. Set enabled=false to skip.
+enabled = true
+voice_provider = "edge"
+max_minutes = 8
+output_path = "briefings/{date}.mp3"
+
+[agent]
+type = "orchestrator"
+max_turns = 60
+temperature = 0.4
+tools = [
+  "rss_fetch",
+  "web_search",
+  "http_request",
+  "memory_store",
+  "memory_search",
+  "think",
+  "file_write",
+  "tts",
+]
+system_prompt = """You are the research-digest orchestrator. Your job is to produce a daily multi-source research briefing.
+
+Workflow:
+1. GATHER: Fetch the configured RSS/web sources.
+2. CLUSTER: Identify 2-4 recurring themes across the gathered items.
+3. DEEP-RESEARCH: For each theme, run a focused deep-research pass with citations.
+4. SANITY-CHECK: Verify every cited URL returns 2xx. Drop or replace any that don't.
+5. SYNTHESIZE: Combine into a single Markdown briefing at the configured output path.
+6. AUDIO (optional): If enabled, speak the briefing via TTS.
+
+Always cite primary sources. Distinguish established facts from speculation. If a theme has only weak sources, say so explicitly rather than padding with speculation."""
