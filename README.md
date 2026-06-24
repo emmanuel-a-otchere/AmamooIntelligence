@@ -20,6 +20,27 @@
 >
 > **[Leaderboard](https://open-jarvis.github.io/OpenJarvis/leaderboard/)**
 
+---
+
+## ⚠️ This is a specialization fork
+
+**OtchereJarvis** is a fork of [`open-jarvis/OpenJarvis`](https://github.com/open-jarvis/OpenJarvis) maintained by [@emmanuel-a-otchere](https://github.com/emmanuel-a-otchere). It tracks upstream and serves as the **general-purpose base** for specialized forks aimed at specific use cases.
+
+**Use this repo as:**
+
+- Your starting point if you want a clean, upstream-tracking OpenJarvis you can specialize.
+- The base you fork from when creating a domain-specific variant (e.g., `OtchereJarvis-trading`, `OtchereJarvis-clinical-notes`).
+
+**Read first:**
+
+- [`docs/SPECIALIZING.md`](docs/SPECIALIZING.md) — How to create and maintain a specialization fork.
+- [`docs/UPSTREAM-SYNC.md`](docs/UPSTREAM-SYNC.md) — How this repo tracks upstream.
+- [`use-cases/`](use-cases/) — Scaffold for new use-case specializations.
+
+For the unmodified upstream framework, see [`open-jarvis/OpenJarvis`](https://github.com/open-jarvis/OpenJarvis).
+
+---
+
 ## Why OpenJarvis?
 
 Personal AI agents are exploding in popularity, but nearly all of them still route intelligence through cloud APIs. Your "personal" AI continues to depend on someone else's server. At the same time, our [Intelligence Per Watt](https://www.intelligence-per-watt.ai/) research showed that local language models already handle 88.7% of single-turn chat and reasoning queries, with intelligence efficiency improving 5.3× from 2023 to 2025. The models and hardware are increasingly ready. What has been missing is the software stack to make local-first personal AI practical.
