@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="OpenJarvis" src="assets/OpenJarvis_Horizontal_Logo.png" width="400">
 
-  <p><i>Personal AI, On Personal Devices.</i></p>
+  <p><i>Personal On-device Intelligence (PoDi).</i></p>
 
   <p>
     <a href="https://scalingintelligence.stanford.edu/blogs/openjarvis/"><img src="https://img.shields.io/badge/project-OpenJarvis-blue" alt="Project"></a>
@@ -24,7 +24,7 @@
 
 <div align="center">
 
-# AmamooIntelligence
+# Amamoo Intel (AI)
 
 *General-purpose base for specialized OpenJarvis forks.*
 
