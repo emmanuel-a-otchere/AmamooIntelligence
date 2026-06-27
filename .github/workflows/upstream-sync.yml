@@ -19,11 +19,12 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  # Required so the sync can push upstream workflow files (e.g. autotag.yml,
-  # installer-integration.yml). Without this, GitHub blocks the push with
-  # "refusing to allow a GitHub App to create or update workflow ... without
-  # workflows permission". Single-maintainer fork, acceptable trade-off.
-  workflows: write
+  # NB: there is no `workflows` key in the workflow-permissions grammar —
+  # setting it makes GitHub reject the YAML at parse time. Instead, this
+  # repo's default workflow permission is set to "Read and write" via
+  # Settings → Actions → General → Workflow permissions, which is what
+  # allows this sync to push modified workflow files (e.g. autotag.yml)
+  # from upstream without rejection.
 
 jobs:
   sync:
